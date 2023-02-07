@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ia_cost_create,ia.mrp.cost,model_ia_mrp_cost,base.group_user,1,1,1,1
+access_ia_cost_prod_create,ia.mrp.prod.cost,model_ia_mrp_prod_cost,base.group_user,1,1,1,1
+

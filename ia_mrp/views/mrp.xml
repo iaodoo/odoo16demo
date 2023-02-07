@@ -1,0 +1,59 @@
+<odoo>
+  <data>  
+
+  <record id="ia_bom_view_form" model="ir.ui.view">
+    <field name="name">ia_bom_view_form</field>
+    <field name="model">mrp.bom</field>
+    <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='miscellaneous']" position="after">
+            <page string="Labour and Overheads">
+              <field name="cost_line_ids">
+                  <tree string="Labour and Overheads"  editable="top">
+                      <field name="product_id" context="{'default_type': 'service'}" required="1" options="{'no_quick_open':True,'no_quick_create':True,'no_create_edit':True}"/>
+                      <field name="name" required="1"/>
+                      <field name="standard_cost"/>              
+                  </tree>
+              </field>   
+              </page>   
+          </xpath>
+        </field>
+      </record>
+
+
+
+   <record id="ia_mrp_production_form_view" model="ir.ui.view">
+    <field name="name">ia_mrp_view_form</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='miscellaneous']" position="after">
+            <page string="Labour and Overheads">
+              <field name="cost_line_ids"  attrs="{'readonly': [('state', '=', 'done')]}">
+                  <tree string="Capture Costs in BoM"  editable="top">
+                      <field name="product_id" context="{'default_type': 'service'}" required="1" options="{'no_quick_open':True,'no_quick_create':True,'no_create_edit':True}"/>
+                      <field name="name" required="1"/>
+                      <field name="standard_cost" invisible="1"/>    
+                      <field name="actual_cost"/>  
+                  </tree>
+              </field>   
+              </page>   
+          </xpath>
+
+          <xpath expr="//page[@name='miscellaneous']//field[@name='origin']" position="after">
+              <field name="account_analytic_id"/>  
+               <field name="analytic_tag_ids" widget="many2many_tags"/>
+          </xpath>
+          <!-- <xpath expr="//div[@name='button_box']" position="inside">
+                        <button class="oe_stat_button" name="action_view_mrp_production_childs" type="object" icon="fa-wrench" attrs="{'invisible': [('mrp_production_child_count', '=', 0)]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="mrp_production_child_count"/></span>
+                                <span class="o_stat_text">Child MO</span>
+                            </div>
+                        </button>
+           </xpath> -->
+
+        </field>
+      </record>
+   </data>
+</odoo>
